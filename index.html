@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rania Ibrahim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --gold: #c9a96e;
+      --dark-gold: #a07c45;
+      --charcoal: #2c2c2c;
+      --soft-gray: #7a7a7a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--warm-white);
+      color: var(--charcoal);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: 0;
+      width: 80px;
+      height: 100%;
+      background: var(--charcoal);
+      clip-path: polygon(0 0, 0 100%, 100% 50%);
+      z-index: 2;
+    }
+
+    .hero-right {
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: 'RI';
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28vw;
+      font-weight: 300;
+      color: rgba(201,169,110,0.08);
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .tagline-vertical {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      position: absolute;
+      right: 40px;
+      bottom: 80px;
+    }
+
+    .hero-greeting {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--cream);
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 32px 0;
+      animation: expandLine 0.8s 0.3s ease both;
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--soft-gray);
+      line-height: 2;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: fadeUp 0.8s 0.6s ease both;
+      transition: gap 0.3s ease;
+    }
+
+    .hero-cta:hover { gap: 24px; }
+    .hero-cta::after {
+      content: '→';
+      font-size: 1rem;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+      gap: 40px;
+      padding: 28px 60px;
+      mix-blend-mode: difference;
+    }
+
+    nav a {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 120px 10vw;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 48px;
+      color: var(--charcoal);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--warm-white);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1rem;
+      line-height: 2;
+      color: #555;
+    }
+
+    .about-text p + p { margin-top: 20px; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .stat-box {
+      border-top: 1px solid var(--gold);
+      padding-top: 20px;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--soft-gray);
+      margin-top: 8px;
+    }
+
+    /* ── SKILLS ── */
+    #skills {
+      background: var(--cream);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .skill-card {
+      background: var(--warm-white);
+      padding: 48px 36px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      background: var(--charcoal);
+      transform: translateY(-4px);
+    }
+
+    .skill-card:hover .skill-title,
+    .skill-card:hover .skill-desc { color: var(--cream); }
+    .skill-card:hover .skill-icon { color: var(--gold); }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--gold);
+      transition: color 0.3s;
+    }
+
+    .skill-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--charcoal);
+      transition: color 0.3s;
+    }
+
+    .skill-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      color: var(--soft-gray);
+      transition: color 0.3s;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--charcoal);
+      text-align: center;
+    }
+
+    #contact .section-title { color: var(--cream); }
+
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-style: italic;
+      color: var(--gold);
+      text-decoration: none;
+      display: block;
+      margin: 40px 0;
+      transition: letter-spacing 0.4s ease;
+    }
+
+    .contact-email:hover { letter-spacing: 0.05em; }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .social-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--soft-gray);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a1a;
+      padding: 24px 10vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: #444;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes expandLine {
+      from { width: 0; opacity: 0; }
+      to   { width: 60px; opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 100px 36px 60px; }
+      .hero-left::after { display: none; }
+      .hero-right { height: 300px; }
+      #about { grid-template-columns: 1fr; gap: 48px; padding: 80px 8vw; }
+      .skills-grid { grid-template-columns: 1fr; }
+      nav { padding: 24px 36px; gap: 24px; }
+      section { padding: 80px 8vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="hero-greeting">Welcome</p>
+      <h1 class="hero-name">Rania<br><em>Ibrahim</em></h1>
+      <div class="hero-divider"></div>
+      <p class="hero-subtitle">
+        Creative Professional<br>
+        Designer &amp; Developer<br>
+        Based in Cairo, Egypt
+      </p>
+      <a class="hero-cta" href="#about">Discover more</a>
+    </div>
+    <div class="hero-right">
+      <span class="tagline-vertical">Portfolio · 2024</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div>
+      <p class="section-label">01 — About</p>
+      <h2 class="section-title">A passion for<br><em style="font-family:'Cormorant Garamond',serif; font-style:italic;">beautiful work</em></h2>
+      <div class="about-text">
+        <p>Hello! I'm Rania Ibrahim — a dedicated professional with a love for creating meaningful experiences. I combine creativity with precision to deliver work that truly resonates.</p>
+        <p>My approach is rooted in attention to detail, clear communication, and a commitment to excellence in everything I produce.</p>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">Projects Done</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Passion &amp; Drive</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">02 — Expertise</p>
+    <h2 class="section-title">What I do</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">✦</div>
+        <h3 class="skill-title">Design</h3>
+        <p class="skill-desc">Crafting visually compelling interfaces and brand identities that leave a lasting impression.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">◈</div>
+        <h3 class="skill-title">Development</h3>
+        <p class="skill-desc">Building clean, performant web applications with modern technologies and best practices.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">◎</div>
+        <h3 class="skill-title">Strategy</h3>
+        <p class="skill-desc">Aligning creative solutions with business goals to drive meaningful results and growth.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label" style="color: var(--gold);">03 — Contact</p>
+    <h2 class="section-title">Let's work<br>together</h2>
+    <a class="contact-email" href="mailto:rania@example.com">rania@example.com</a>
+    <div class="social-links">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Behance</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2024 Rania Ibrahim</span>
+    <span>Made with ♥ — All Rights Reserved</span>
+  </footer>
+
+</body>
+</html>
